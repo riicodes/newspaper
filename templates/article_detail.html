@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}{{ article.title }}{% endblock title %}
+{% block content %}
+	<div class="col-lg-8 offset-lg-2 col-10 offset-1">
+		<div class="article my-2">
+			<div class="d-flex bd-highlight mb-3">
+				<div class="me-auto bd-highlight"><h1>{{ article.title }}</h1></div>
+
+				<div class="bd-highlight">
+					{% if request.user == article.author %}
+						<a href="{% url 'article_update' article.id %}" class="btn text-primary"><i
+								class="fas fa-pen"></i></a>
+						<a href="{% url 'article_delete' article.id %}" class="btn text-danger"><i
+								class="fas fa-trash-alt"></i></a>
+					{% endif %}
+				</div>
+			</div>
+			<h2>Author: {{ article.author }}</h2>
+			<small>{{ article.date }}</small>
+			<p>{{ article.body }}</p>
+		</div>
+		{% if article.comments.all %}
+			<h3>Comments</h3>
+			{% for comments in article.comments.all %}
+				<div class="comment my-2">
+					<strong class="me-2">{{ comments.author }}</strong>{{ comments.comment }}
+				</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+{% endblock content %}

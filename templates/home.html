@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+	<div style="background-color: aliceblue; height: 80vh"
+		 class="d-flex flex-column align-items-center justify-content-center">
+		{% if user.is_authenticated %}
+			<h1>Write your articles</h1>
+			<a href="{% url 'article_create' %}" class="btn btn-outline-dark mt-4">New Article</a>
+		{% else %}
+			<h1>Sign up to access our content</h1>
+			<a href="{% url 'signup' %}" class="btn btn-outline-dark mt-4">Sign Up</a>
+		{% endif %}
+	</div>
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Articles{% endblock title %}
+{% block content %}
+	<div class="col-lg-8 offset-lg-2 col-10 offset-1">
+		{% for article in articles %}
+			<div class="article my-2">
+				<h1><a href="{% url 'article_detail' article.id %}">{{ article.title }}</a></h1>
+				<h2>Author: {{ article.author }}</h2>
+
+				<small>{{ article.date }}</small>
+				<p>{{ article.body|truncatechars:500 }}</p>
+				<p></p>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock content %}
